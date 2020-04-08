@@ -1,10 +1,10 @@
+from sqlalchemy.ext.declarative import declarative_base
+import json
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
 import os
 from sqlalchemy import Column, String, Integer, create_engine, Date, Table, ForeignKey
-from sqlalchemy.orm import relationship
-from flask_sqlalchemy import SQLAlchemy
-import json
 
-from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
@@ -30,7 +30,7 @@ def setup_db(app, database_path=database_path):
 
 class MovieActorAssociation(db.Model):
     __table_name__ = "movie_actor_association"
-    
+
     id = db.Column(Integer, primary_key=True)
     movie_id = Column(Integer, ForeignKey('movie.id'))
     actor_id = Column(Integer, ForeignKey('actor.id'))
@@ -79,8 +79,9 @@ class Actor(db.Model):
     age = Column(Integer)
 
     def __init__(self, name, gender, age):
-        self.title = title
-        self.release_date = release_date
+        self.name = name
+        self.gender = gender
+        self.age = age
 
     def insert(self):
         db.session.add(self)
