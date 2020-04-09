@@ -15,7 +15,7 @@ def create_app(test_config=None):
     @app.route('/movies')
     def get_movies():
         movies = Movie.query.order_by(Movie.id).all()
-        if movies is None:
+        if movies == []:
             abort(404)
         formatted_movies = [movie.format() for movie in movies]
         return jsonify({
@@ -33,7 +33,7 @@ def create_app(test_config=None):
 
         try:
             movie = Movie(title=new_title,
-                          release_date=new_release_date, actor=new_actors)
+                          release_date=new_release_date)
             movie.insert()
             movies = Movie.query.order_by(Movie.id).all()
             formatted_movies = [movie.format() for movie in movies]
@@ -85,7 +85,7 @@ def create_app(test_config=None):
     @app.route('/actors')
     def get_actors():
         actors = Actor.query.order_by(Actor.id).all()
-        if actors is None:
+        if actors == []:
             abort(404)
         formatted_actors = [actor.format() for actor in actors]
         return jsonify({
@@ -93,7 +93,7 @@ def create_app(test_config=None):
             "actors": formatted_actors
         })
 
-    @app.route('/actor', methods=["POST"])
+    @app.route('/actors', methods=["POST"])
     def create_actor():
         body = request.get_json()
 
@@ -109,14 +109,14 @@ def create_app(test_config=None):
             formatted_actors = [actor.format() for actor in actors]
             return jsonify({
                 "success": True,
-                "movies": formatted_actors
+                "actors": formatted_actors
             })
         except Exception:
             abort(422)
 
-    @app.route('/actor/<int:actor_id>', methods=["PATCH"])
+    @app.route('/actors/<int:actor_id>', methods=["PATCH"])
     def edit_actor(actor_id):
-        actor = Actor.query().filter(Actor.id == actor_id).one_or_none()
+        actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
         if actor is None:
             abort(404)
 
@@ -136,9 +136,9 @@ def create_app(test_config=None):
         except Exception:
             abort(422)
 
-    @app.route('/actor/<int:actor_id>', methods=["DELETE"])
+    @app.route('/actors/<int:actor_id>', methods=["DELETE"])
     def delete_actor(actor_id):
-        actor = Actor.query().filter(Actor.id == actor_id).one_or_none()
+        actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
         if actor is None:
             abort(404)
         try:
@@ -147,7 +147,7 @@ def create_app(test_config=None):
             formatted_actors = [actor.format() for actor in actors]
             return jsonify({
                 "success": True,
-                "movies": formatted_actors
+                "actors": formatted_actors
             })
         except Exception:
             abort(422)
@@ -165,7 +165,7 @@ def create_app(test_config=None):
         return jsonify({
             'success': False,
             "error": 422,
-            "message": "Unprocessable entity"
+            "message": "Unprocessable Entity"
         }), 422
 
     @app.errorhandler(400)

@@ -3,7 +3,7 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 import os
-from sqlalchemy import Column, String, Integer, create_engine, Date, Table, ForeignKey
+from sqlalchemy import Column, String, Integer, Date, ForeignKey
 
 
 Base = declarative_base()
@@ -42,7 +42,7 @@ class Movie(db.Model):
     id = Column(Integer, primary_key=True)
     title = Column(String)
     release_date = Column(Date)
-    actors = relationship("actor",
+    actors = relationship("Actor",
                           secondary="movie_actor_association",
                           backref="movies")
 
