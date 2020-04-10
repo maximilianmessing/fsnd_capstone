@@ -52,19 +52,20 @@ def create_app(test_config=None):
         if movie is None:
             abort(404)
 
-        try:
-            movie.title = body.get('title', None)
-            movie.release_date = body.get('release_date', None)
-            movie.actors = body.get('actors', None)
-            movie.update()
-            movies = Movie.query.order_by(Movie.id).all()
-            formatted_movies = [movie.format() for movie in movies]
-            return jsonify({
-                "success": True,
-                "movies": formatted_movies
+        # try:
+        movie.title = body.get('title', None)
+        movie.release_date = body.get('release_date', None)
+        movie.actors = Actor.query.filter(Actor.id.in_(
+            body.get('actors', None))).all()
+        movie.update()
+        movies = Movie.query.order_by(Movie.id).all()
+        formatted_movies = [movie.format() for movie in movies]
+        return jsonify({
+            "success": True,
+            "movies": formatted_movies
             })
-        except Exception:
-            abort(422)
+        # except Exception:
+        #     abort(422)
 
     @app.route('/movies/<int:movie_id>', methods=["DELETE"])
     def delete_movie(movie_id):
@@ -131,7 +132,7 @@ def create_app(test_config=None):
             formatted_actors = [actor.format() for actor in actors]
             return jsonify({
                 "success": True,
-                "movies": formatted_actors
+                "actors": formatted_actors
             })
         except Exception:
             abort(422)

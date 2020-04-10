@@ -127,6 +127,28 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], "Resource was not found")
 
+    def test_2_patch_actors(self):
+        res = self.client().patch('actors/1', json={'name': 'Maximilian Messing',
+                                                    'age': 25,
+                                                    'gender': 'male',
+                                                    })
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(len(data['actors']), 1)
+
+    def test_2_patch_movies(self):
+        res = self.client().patch('movies/1', json={'title': 'Terminator',
+                                                    'release_date': '2012-12-04',
+                                                    'actors': [1],
+                                                    })
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(len(data['movies']), 1)
+
     def test_3_delete_movie(self):
         res = self.client().delete('movies/1')
         data = json.loads(res.data)

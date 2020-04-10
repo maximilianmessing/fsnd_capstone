@@ -66,7 +66,7 @@ class Movie(db.Model):
             'id': self.id,
             'title': self.title,
             'release_date': self.release_date,
-            'actors': self.actors
+            'actors': [actor.id for actor in self.actors]
         }
 
 
