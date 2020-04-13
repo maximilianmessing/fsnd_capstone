@@ -111,6 +111,9 @@ GET '/actors'
   "success": true
 }
 ```
+- Possible Errors:
+  - 404 if nothing is found in the database
+
 
 Post '/actors/'
 - Add an actor to the database
@@ -124,6 +127,8 @@ Example payload:
 }
 ```
 - Returns: An object with a list of actors with id as an integer, name as a string, age as an integer, gender as a string --> Example get actors
+- Possible Errors:
+  - 422 if invalid object is submitted
 
 PATCH '/actors/{actor_id}'
 - Edit an actor in the database
@@ -139,11 +144,17 @@ Example payload:
 }
 ```
 - Returns: An object with a list of actors with id as an integer, name as a string, age as an integer, gender as a string --> Example get actors
+- Possible Errors:
+  - 404 if actor does not exist
+  - 422 if invalid actor was submitted
 
 DELETE '/actors/{actor_id}'
 - delete an actor in the database
 - Path argument: Actor id as a integer
 - Returns: An object with a list of actors with id as an integer, name as a string, age as an integer, gender as a string --> Example get actors
+- Possible Errors:
+  - 404 if actor does not exist
+  - 422 if deletion wasn't possible
 
 GET '/movies'
 - Fetches actors from the database with title, release date and participating actors
@@ -170,6 +181,9 @@ GET '/movies'
   ],
   "success": true
   ```
+- Possible Errors:
+  - 404 if nothing is found in the database
+
 
 Post '/movies/'
 - Add an movies in the database
@@ -182,6 +196,8 @@ Example payload:
 }
 ```
 - Returns: An object with a list of movie with title as a string, release date as a date and actors as an array of actor ids. --> Example get movies
+- Possible Errors:
+  - 422 if invalid movie is submitted
 
 Patch '/movies/{movie_id}'
 - Edit a movie in the database
@@ -195,11 +211,17 @@ Example payload:
 }
 ```
 - Returns: An object with a list of movie with title as a string, release date as a date and actors as an array of actor ids. --> Example get movies
+- Possible Errors:
+  - 404 if movie was not found in the database
+  - 422 if invalid object is submitted
 
 Delete '/movies/{movie_id}'
 - Delete a movie in the database
 - Path argument: Movie id as a integer
 - Returns: An object with a list of movie with title as a string, release date as a date and actors as an array of actor ids. --> Example get movies
+- Possible Errors:
+  - 404 if movie was not found in the database
+  - 422 if movie could not be deleted
 
 
 Defined Error handlers:
