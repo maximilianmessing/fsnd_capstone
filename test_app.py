@@ -293,5 +293,6 @@ if __name__ == "__main__":
         'messing.maximilian+director@gmail.com')
     AUTH_HEADER_ASSISTANT = getUserTokenHeaders(
         'messing.maximilian+assistant@gmail.com')
-    print(AUTH_HEADER_EXECUTIVE)
+    # You can use the print method to print the token for Testing
+    # print(AUTH_HEADER_EXECUTIVE)
     unittest.main()
