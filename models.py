@@ -1,5 +1,4 @@
 from sqlalchemy.ext.declarative import declarative_base
-import json
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 import os
