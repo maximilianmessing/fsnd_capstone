@@ -33,7 +33,7 @@ This will install all of the required packages we selected within the `requireme
 
 - [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in app.py and can reference models.py. 
 
-- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server. 
+- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from a potential frontend server. 
 
 ## Database Setup
 With Postgres running, initialize the the database
@@ -257,5 +257,5 @@ python test_app.py
 
 ## Hosting
 
-The application is hosted by heroku under the url: 'xyz.com'
+The application is hosted by heroku under the url: ['heroku app'](https://fsndcapstonecasting.herokuapp.com/)
 In the `test_app.py` you can find a convenient script to get the need access token. 
