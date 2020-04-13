@@ -56,11 +56,11 @@ class CastingTestCase(unittest.TestCase):
 
         self.new_actor = {'name': 'Maximilian Messing',
                           'age': 25,
-                          'gender': 'female',
+                          'gender': 'male',
                           }
         self.new_invalid_actor = {'name': 'Maximilian Messing',
                                   'age': 'twenty five',
-                                  'gender': 'female',
+                                  'gender': 'male',
                                   }
         self.new_movie = {'title': 'Terminator',
                           'release_date': '2002-12-04',
@@ -293,4 +293,5 @@ if __name__ == "__main__":
         'messing.maximilian+director@gmail.com')
     AUTH_HEADER_ASSISTANT = getUserTokenHeaders(
         'messing.maximilian+assistant@gmail.com')
+    print(AUTH_HEADER_EXECUTIVE)
     unittest.main()
